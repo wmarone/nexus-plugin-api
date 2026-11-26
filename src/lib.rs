@@ -8,8 +8,7 @@
 //! A plugin library exports two symbols, `nexus_get_version`
 //! ([`GetVersion`]) and `nexus_get_capabilities` ([`GetCapabilities`]).
 //! Everything else is reached through the [`PluginVTable`] of each plugin the
-//! library reports. Built-in plugins provide the same descriptors from inside
-//! the host. Libraries stay loaded until the process exits.
+//! library reports. Libraries stay loaded until the process exits.
 //!
 //! # Call order
 //!
@@ -21,7 +20,9 @@
 //! ```
 //!
 //! `shutdown` is called exactly once for every successful `init`, including
-//! when a later call failed or `start` was never reached.
+//! when a later call failed or `start` was never reached. The exception: at
+//! exit the host waits only 2 seconds for instances to shut down, so one still
+//! in a call may never receive it.
 //!
 //! # Threads
 //!
